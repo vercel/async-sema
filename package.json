@@ -1,5 +1,5 @@
 {
-  "name": "@zeit/aync-sema",
+  "name": "@zeit/async-sema",
   "version": "0.1.0",
   "description": "Async semaphore",
   "main": "index.js",
