@@ -1,0 +1,13 @@
+{
+  "name": "@zeit/aync-sema",
+  "version": "0.1.0",
+  "description": "Async semaphore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hbp",
+  "dependencies": {
+    "double-ended-queue": "2.1.0-0"
+  }
+}
