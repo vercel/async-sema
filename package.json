@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Async semaphore",
   "main": "index.js",
+  "publishConfig": {
+    "registry": "http://10.100.79.27"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
