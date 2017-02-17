@@ -32,7 +32,7 @@ class Sema {
     }
   }
 
-  async v () {
+  v () {
     let token = this.free.pop()
     if (token)
       return token
