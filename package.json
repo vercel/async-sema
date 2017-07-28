@@ -2,6 +2,8 @@
   "name": "async-sema",
   "version": "0.3.0",
   "description": "Semaphore using `async` and `await`",
+  "repository": "zeit/async-sema",
+  "license": "MIT",
   "main": "index.js",
   "author": "hbp",
   "files": [
