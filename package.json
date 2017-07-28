@@ -1,0 +1,10 @@
+{
+  "name": "async-sema",
+  "version": "0.3.0",
+  "description": "Async semaphore",
+  "main": "index.js",
+  "author": "hbp",
+  "dependencies": {
+    "double-ended-queue": "2.1.0-0"
+  }
+}
