@@ -4,6 +4,9 @@
   "description": "Async semaphore",
   "main": "index.js",
   "author": "hbp",
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
     "double-ended-queue": "2.1.0-0"
   }
