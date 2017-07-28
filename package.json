@@ -1,7 +1,7 @@
 {
   "name": "async-sema",
   "version": "0.3.0",
-  "description": "Async semaphore",
+  "description": "Semaphore using `async` and `await`",
   "main": "index.js",
   "author": "hbp",
   "files": [
