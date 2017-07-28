@@ -27,6 +27,14 @@ npm install --save async-sema
 
 Then start using it like shown [here](./examples).
 
+## Caught a Bug?
+
+1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
+2. Move into the directory of the clone: `cd async-sema`
+3. Link it to the global module directory of Node.js: `npm link`
+
+Inside the project where you want to test your clone of the package, you can now either use `npm link async-sema` to link the clone to the local dependencies.
+
 ## Author
 
 Olli Vanhoja ([@OVanhoja](https://twitter.com/OVanhoja)) - [▲ZEIT](https://zeit.co)
