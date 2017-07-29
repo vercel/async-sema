@@ -1,8 +1,5 @@
 # async-sema
 
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
-[![Slack Channel](http://zeit-slackin.now.sh/badge.svg)](https://zeit.chat/)
-
 This is a semaphore implementation for use with async-await. The implementation
 follows the traditional definition of a semaphore rather than the definition of
 an asynchronous semaphore. Where as the latter one generally allows every
