@@ -1,5 +1,8 @@
+// Native
 const EventEmitter = require('events')
-const Deque = require("double-ended-queue")
+
+// Packages
+const Deque = require('double-ended-queue')
 
 class ReleaseEmitter extends EventEmitter {}
 
@@ -56,4 +59,5 @@ class Sema {
     return this.waiting.length
   }
 }
+
 module.exports = Sema
