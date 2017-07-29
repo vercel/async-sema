@@ -1,6 +1,6 @@
 {
   "name": "async-sema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Semaphore using `async` and `await`",
   "repository": "zeit/async-sema",
   "license": "MIT",
