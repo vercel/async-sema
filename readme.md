@@ -1,6 +1,6 @@
 # async-sema
 
-This is a semaphore implementation for use with async-await. The implementation
+This is a semaphore implementation for use with `async` and `await`. The implementation
 follows the traditional definition of a semaphore rather than the definition of
 an asynchronous semaphore. Where as the latter one generally allows every
 defined task to proceed immediately and synchronizes at the end, async-sema
