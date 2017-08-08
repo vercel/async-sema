@@ -11,22 +11,32 @@ function defaultInit () {
 }
 
 class Sema {
-  constructor (nr, { initFn, capacity }) {
+  constructor (nr, { initFn, pauseFn, resumeFn, capacity }) {
     initFn = initFn || defaultInit
     capacity = capacity || 10
+
+    if (pauseFn ^ resumeFn) {
+      throw new Error('pauseFn and resumeFn must be both set for pausing')
+    }
 
     this.nrTokens = nr
     this.free = new Deque(nr)
     this.waiting = new Deque(capacity)
     this.releaseEmitter = new ReleaseEmitter()
     this.noTokens = initFn === defaultInit
+    this.pauseFn = pauseFn
+    this.resumeFn = resumeFn
 
     this.releaseEmitter.on('release', (token) => {
       const p = this.waiting.shift()
       if (p) {
         p.resolve(token)
       } else {
-       this.free.push(token)
+        if (this.resumeFn && this.paused) {
+          this.paused = false
+          this.resumeFn()
+        }
+        this.free.push(token)
       }
     })
 
@@ -41,6 +51,10 @@ class Sema {
       return token
 
     return new Promise((resolve, reject) => {
+      if (this.pauseFn && !this.paused) {
+        this.paused = true
+        this.pauseFn()
+      }
       this.waiting.push({ resolve, reject })
     })
   }
