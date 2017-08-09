@@ -51,7 +51,9 @@ class Sema {
 
   drain () {
     const a = new Array(this.nrTokens)
-    a.fill(this.v())
+    for (let i = 0; i < this.nrTokens; i++) {
+      a[i] = this.v()
+    }
     return Promise.all(a)
   }
 
