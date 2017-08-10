@@ -36,6 +36,7 @@ class Sema {
           this.paused = false
           this.resumeFn()
         }
+
         this.free.push(token)
       }
     })
@@ -47,14 +48,17 @@ class Sema {
 
   async v () {
     let token = this.free.pop()
-    if (token)
+
+    if (token) {
       return token
+    }
 
     return new Promise((resolve, reject) => {
       if (this.pauseFn && !this.paused) {
         this.paused = true
         this.pauseFn()
       }
+
       this.waiting.push({ resolve, reject })
     })
   }
