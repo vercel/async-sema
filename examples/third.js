@@ -13,10 +13,12 @@ const rl = readline.createInterface({
 
 function pause() {
   console.log('Pausing the stream')
+  rl.pause();
 }
 
 function resume() {
   console.log('Resuming the stream')
+  rl.resume();
 }
 
 const s = new Sema(5, { pauseFn: pause, resumeFn: resume })
