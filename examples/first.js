@@ -1,7 +1,6 @@
-#!/bin/sh
-// >&/dev/null;exec node --harmony_async_await $0 $@
+#!/usr/bin/env node
 
-const Sema = require('./index.js')
+const Sema = require('../index.js')
 
 function getRnd (min, max) {
   min = Math.ceil(min)

@@ -1,7 +1,6 @@
-#!/bin/sh
-// >&/dev/null;exec node --harmony_async_await $0 $@
+#!/usr/bin/env node
 
-const Sema = require('./index.js')
+const Sema = require('../index.js')
 const redis = require('promise-redis')
 
 async function f () {
