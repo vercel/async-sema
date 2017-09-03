@@ -11,10 +11,7 @@ function defaultInit () {
 }
 
 class Sema {
-  constructor (nr, { initFn, pauseFn, resumeFn, capacity }) {
-    initFn = initFn || defaultInit
-    capacity = capacity || 10
-
+  constructor (nr, { initFn = defaultInit, pauseFn, resumeFn, capacity = 10 } = {}) {
     if (pauseFn ^ resumeFn) {
       throw new Error('pauseFn and resumeFn must be both set for pausing')
     }
