@@ -1,17 +1,7 @@
 #!/usr/bin/env node
 
-const Sema = require('async-sema')
-
-function rateLimit(rps) {
-  const sema = new Sema(rps);
-
-  return async function rl() {
-    await sema.v();
-    setTimeout(() => sema.p(), 1000);
-  }
-}
-
-const lim = rateLimit(5);
+const RateLimit = require('async-sema/rate-limit')
+const lim = RateLimit(5);
 
 async function f() {
   const n = 50;
