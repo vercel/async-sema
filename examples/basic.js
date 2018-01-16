@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Sema = require('../index.js')
+const Sema = require('async-sema')
 
 function getRnd (min, max) {
   min = Math.ceil(min)

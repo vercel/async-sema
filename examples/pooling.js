@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Sema = require('../index.js')
+const Sema = require('async-sema')
 const redis = require('promise-redis')
 
 async function f () {
