@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Sema = require('../index.js')
+const Sema = require('async-sema')
 
 function rateLimit(rps) {
   const sema = new Sema(rps);

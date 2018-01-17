@@ -2,7 +2,7 @@
 
 // Usage ./third.js < VERY_LARGE_FILE
 
-const Sema = require('../index.js')
+const Sema = require('async-sema')
 const readline = require('readline')
 
 const rl = readline.createInterface({
