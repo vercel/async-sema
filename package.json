@@ -5,6 +5,7 @@
   "repository": "zeit/async-sema",
   "license": "MIT",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": "hbp",
   "keywords": [
     "semaphore",
