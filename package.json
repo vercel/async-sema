@@ -14,7 +14,8 @@
   ],
   "files": [
     "index.js",
-    "rate-limit.js"
+    "rate-limit.js",
+    "index.d.ts"
   ],
   "dependencies": {
     "double-ended-queue": "2.1.0-0"
