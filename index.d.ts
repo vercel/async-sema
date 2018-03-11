@@ -8,10 +8,14 @@ declare module 'async-sema' {
     drain(): Promise<string[]>;
     
     nrWaiting(): number;
+
+    v(): Promise<string>;
+
+    acquire(token?: string): void;
     
     p(token?: string): void;
-    
-    v(): Promise<string>;
+
+    release(token?: string): void;
     
   }
   

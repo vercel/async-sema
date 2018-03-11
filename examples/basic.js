@@ -16,10 +16,10 @@ async function f () {
 
   const s = new Sema(13, { capacity: arr.length })
   await Promise.all(arr.map(async (elem) => {
-    await s.v()
+    await s.acquire()
     console.log(elem, s.nrWaiting())
     await new Promise((resolve) => setTimeout(resolve, getRnd(500, 3000)))
-    s.p()
+    s.release()
   }))
   console.log('hello')
 }

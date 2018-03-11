@@ -4,7 +4,7 @@ module.exports = function rateLimit(rps) {
   const sema = new Sema(rps);
 
   return async function rl() {
-    await sema.v();
-    setTimeout(() => sema.p(), 1000);
+    await sema.acquire();
+    setTimeout(() => sema.release(), 1000);
   }
 }

@@ -6,9 +6,9 @@ const redis = require('promise-redis')
 async function f () {
   const red = new Sema(3, { initFn: () => redis().createClient(process.env.REDIS_URL) })
 
-  const db = await red.v()
+  const db = await red.acquire()
   console.log(await db.get('id'))
-  red.p(db)
+  red.release(db)
 
   const dbs = await red.drain()
   dbs.map((db) => db.quit())

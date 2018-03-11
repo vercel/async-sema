@@ -43,7 +43,7 @@ class Sema {
     }
   }
 
-  async v () {
+  async acquire () {
     let token = this.free.pop()
 
     if (token) {
@@ -59,15 +59,21 @@ class Sema {
       this.waiting.push({ resolve, reject })
     })
   }
+  async v () {
+    return acquire();
+  }
 
-  p (token) {
+  release (token) {
     this.releaseEmitter.emit('release', this.noTokens ? '1' : token)
+  }
+  p (token) {
+    return release(token)
   }
 
   drain () {
     const a = new Array(this.nrTokens)
     for (let i = 0; i < this.nrTokens; i++) {
-      a[i] = this.v()
+      a[i] = this.acquire()
     }
     return Promise.all(a)
   }
