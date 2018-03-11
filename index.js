@@ -60,14 +60,14 @@ class Sema {
     })
   }
   async v () {
-    return acquire();
+    return this.acquire();
   }
 
   release (token) {
     this.releaseEmitter.emit('release', this.noTokens ? '1' : token)
   }
   p (token) {
-    return release(token)
+    return this.release(token)
   }
 
   drain () {
