@@ -1,5 +1,6 @@
 // Native
 const EventEmitter = require('events')
+const util = require('util')
 
 // Packages
 const Deque = require('double-ended-queue')
@@ -83,4 +84,6 @@ class Sema {
   }
 }
 
+Sema.prototype.v = util.deprecate(Sema.prototype.v, '`v()` is deperecated; use `acquire()` instead')
+Sema.prototype.p = util.deprecate(Sema.prototype.p, '`p()` is deprecated; use `release()` instead')
 module.exports = Sema
