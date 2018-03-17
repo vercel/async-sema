@@ -11,7 +11,7 @@ declare module 'async-sema' {
 
     v(): Promise<string>;
 
-    acquire(token?: string): void;
+    acquire(): Promise<string>;
     
     p(token?: string): void;
 
