@@ -1,5 +1,6 @@
 // Native
 const EventEmitter = require('events')
+const util = require('util')
 
 // Packages
 const Deque = require('double-ended-queue')
@@ -43,7 +44,7 @@ class Sema {
     }
   }
 
-  async v () {
+  async acquire () {
     let token = this.free.pop()
 
     if (token) {
@@ -59,15 +60,21 @@ class Sema {
       this.waiting.push({ resolve, reject })
     })
   }
+  async v () {
+    return this.acquire();
+  }
 
-  p (token) {
+  release (token) {
     this.releaseEmitter.emit('release', this.noTokens ? '1' : token)
+  }
+  p (token) {
+    return this.release(token)
   }
 
   drain () {
     const a = new Array(this.nrTokens)
     for (let i = 0; i < this.nrTokens; i++) {
-      a[i] = this.v()
+      a[i] = this.acquire()
     }
     return Promise.all(a)
   }
@@ -77,4 +84,6 @@ class Sema {
   }
 }
 
+Sema.prototype.v = util.deprecate(Sema.prototype.v, '`v()` is deperecated; use `acquire()` instead')
+Sema.prototype.p = util.deprecate(Sema.prototype.p, '`p()` is deprecated; use `release()` instead')
 module.exports = Sema

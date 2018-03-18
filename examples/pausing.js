@@ -23,11 +23,11 @@ function resume() {
 
 const s = new Sema(5, { pauseFn: pause, resumeFn: resume })
 async function parse(line) {
-  await s.v()
+  await s.acquire()
 
   console.log(line)
 
-  s.p()
+  s.release()
 }
 
 rl.on('line', (line) => {
