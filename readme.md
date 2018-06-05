@@ -24,6 +24,25 @@ npm install --save async-sema
 
 Then start using it like shown [here](./examples).
 
+## Example
+See [/examples](./examples) for more use cases.
+```js
+const Sema = require('async-sema');
+const s = new Sema(4, { capactiy: 100 }) // 4 async calls in "parallel", up to 100 async calls on this sema
+
+async function fetchData() {
+  await s.acquire()
+  console.log(s.nrWaiting() + ' calls to fetch are waiting')
+  // ... do some long async stuff
+  s.release()
+}
+
+for(let i = 0; i < 100; i++) {
+  fetchData()
+}
+```
+
+
 ## Contributing
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
