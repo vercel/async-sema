@@ -27,32 +27,19 @@ Then start using it like shown [here](./examples).
 ## Example
 See [/examples](./examples) for more use cases.
 ```js
-const Sema = require('async-sema')
+const Sema = require('async-sema');
+const s = new Sema(4, { capactiy: 100 }) // 4 async calls in "parallel", up to 100 async calls on this sema
 
-function getRnd (min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
+async function fetchData() {
+  await s.acquire()
+  console.log(s.nrWaiting() + ' calls to fetch are waiting')
+  // ... do some long async stuff
+  s.release()
 }
 
-async function f () {
-  const arr = []
-
-  for (let i = 0; i < 100; i++)
-  arr.push(i + 1)
-
-  const s = new Sema(13, { capacity: arr.length })
-  await Promise.all(arr.map(async (elem) => {
-    await s.acquire()
-    console.log(elem, s.nrWaiting())
-    await new Promise((resolve) => setTimeout(resolve, getRnd(500, 3000)))
-    s.release()
-  }))
-
-  console.log('hello')
+for(let i = 0; i < 100; i++) {
+  fetchData()
 }
-
-f().catch((e) => console.log(e)).then(() => console.log('READY'))
 ```
 
 
