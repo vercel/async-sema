@@ -12,6 +12,14 @@
     "async",
     "await"
   ],
+  "homepage": "https://github.com/zeit/async-sema",
+  "bugs": {
+    "url": "https://github.com/zeit/async-sema/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeit/async-sema.git"
+  },
   "files": [
     "index.js",
     "rate-limit.js",
