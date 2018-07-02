@@ -28,7 +28,7 @@ Then start using it like shown [here](./examples).
 See [/examples](./examples) for more use cases.
 ```js
 const Sema = require('async-sema');
-const s = new Sema(4, { capactiy: 100 }) // 4 async calls in "parallel", up to 100 async calls on this sema
+const s = new Sema(4, { capacity: 100 }) // 4 async calls in "parallel", up to 100 async calls on this sema
 
 async function fetchData() {
   await s.acquire()
