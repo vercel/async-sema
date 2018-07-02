@@ -7,13 +7,17 @@ const Deque = require('double-ended-queue')
 
 class ReleaseEmitter extends EventEmitter {}
 
+function isFn (x) {
+  return typeof x === 'function'
+}
+
 function defaultInit () {
   return '1'
 }
 
 class Sema {
   constructor (nr, { initFn = defaultInit, pauseFn, resumeFn, capacity = 10 } = {}) {
-    if (pauseFn ^ resumeFn) {
+    if (isFn(pauseFn) ^ isFn(resumeFn)) {
       throw new Error('pauseFn and resumeFn must be both set for pausing')
     }
 
