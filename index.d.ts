@@ -3,7 +3,7 @@ declare module 'async-sema' {
   class Sema {
     
     constructor(nr: number,
-                options: { initFn?: () => string, pauseFn?: () => void, resumeFn?: () => void, capacity?: number });
+                options?: { initFn?: () => string, pauseFn?: () => void, resumeFn?: () => void, capacity?: number });
     
     drain(): Promise<string[]>;
     
