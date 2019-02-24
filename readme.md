@@ -67,7 +67,9 @@ async function f() {
 
 ## API
 
-### Constructor(nr, { initFn, pauseFn, resumeFn, capacity })
+### Sema
+
+#### Constructor(nr, { initFn, pauseFn, resumeFn, capacity })
 
 - `nr` The maximum number of callers allowed to acquire the semaphore
   concurrently.
@@ -84,28 +86,49 @@ async function f() {
   semaphore. This is typically used by high performance where the developer
   can make a rough estimate of the number of concurrent users of a semaphore.
 
-### async drain()
+#### async drain()
 
 Drains the semaphore and returns all the initialized tokens in an array.
 Draining is an ideal way to ensure there are no pending async tasks, for
 example before a process will terminate.
 
-### nrWaiting()
+#### nrWaiting()
 
 Returns the number of callers waiting on the semaphore, i.e. the number of
 pending promises.
 
-### async acquire()
+#### async acquire()
 
 Acquire a token from the semaphore, thus decrement the number of available
 execution slots. If `initFn` is not used then the return value of the function
 can be discarded.
 
-### release(token)
+#### release(token)
 
 Release the semaphore, thus increment the number of free execution slots. If
 `initFn` is used then the `token` returned by `acquire()` should be given as
 an argument when calling this function.
+
+### RateLimit(rps, {timeUnit, uniformDistribution})
+
+Creates a rate limiter function that blocks with a promise whenever the rate
+limit is hit and resolves the promise once the call rate is within the limit
+set by `rps`.
+
+The `timeUnit` is an optional argument setting the width of the rate limiting
+window in milliseconds. The default `timeUnit` is `1000 ms`, therefore making
+the `rps` argument act as requests per second limit.
+
+The `uniformDistribution` enforces a discrete uniform distribution over time,
+instead of the default that allows hitting the function `rps` time and then
+pausing for `timeWindow` milliseconds. Setting the `uniformDistribution`
+option is mainly useful in a situation where the flow of rate limit function
+calls is continuous and and occuring faster than `timeUnit` (e.g. reading a
+file) and not enabling it would cause the maximum number of calls to resolve
+immediately (thus exhaust the limit immediately) and therefore the next bunch
+calls would need to wait for `timeWindow` milliseconds. However if the flow is
+sparse then this option may make the
+code run slower with no advantages.
 
 ## Contributing
 
