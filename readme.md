@@ -28,7 +28,7 @@ Then start using it like shown [here](./examples).
 See [/examples](./examples) for more use cases.
 
 ```js
-const Sema = require('async-sema');
+const { Sema } = require('async-sema');
 const s = new Sema(
   4, // Allow 4 concurrent async calls
   {
@@ -53,7 +53,7 @@ The package also offers a simple rate limiter utilizing the semaphore
 implementation.
 
 ```js
-const RateLimit = require('async-sema/rate-limit');
+const { RateLimit } = require('async-sema');
 
 async function f() {
   const lim = RateLimit(5); // rps
