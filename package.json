@@ -2,10 +2,10 @@
   "name": "async-sema",
   "version": "2.2.0",
   "description": "Semaphore using `async` and `await`",
-  "repository": "zeit/async-sema",
-  "license": "MIT",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeit/async-sema.git"
+  },
   "author": "Olli Vanhoja",
   "keywords": [
     "semaphore",
@@ -16,13 +16,38 @@
   "bugs": {
     "url": "https://github.com/zeit/async-sema/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zeit/async-sema.git"
-  },
+  "license": "MIT",
   "files": [
-    "index.js",
-    "rate-limit.js",
-    "index.d.ts"
-  ]
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint:staged": "lint-staged",
+    "prepublishOnly": "yarn build",
+    "prettier": "prettier --write --single-quote './{src,test}/**/*.ts'",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.4",
+    "@types/node": "11.9.3",
+    "jest": "24.1.0",
+    "lint-staged": "8.1.3",
+    "pre-commit": "1.2.2",
+    "prettier": "1.16.4",
+    "ts-jest": "23.10.5",
+    "typescript": "3.3.3"
+  },
+  "pre-commit": "lint:staged",
+  "lint-staged": {
+    "*.{js,ts}": [
+      "prettier --write --single-quote",
+      "git add"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "verbose": false,
+    "testURL": "http://localhost/"
+  }
 }

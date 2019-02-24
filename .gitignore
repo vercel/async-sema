@@ -1,5 +1,9 @@
 # dependencies
 node_modules
 
+# build results
+lib
+
 # logs
 npm-debug.log
+yarn-error.log
