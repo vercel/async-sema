@@ -119,7 +119,7 @@ The `timeUnit` is an optional argument setting the width of the rate limiting
 window in milliseconds. The default `timeUnit` is `1000 ms`, therefore making
 the `rps` argument act as requests per second limit.
 
-The `uniformDistribution` enforces a discrete uniform distribution over time,
+The `uniformDistribution` argument enforces a discrete uniform distribution over time,
 instead of the default that allows hitting the function `rps` time and then
 pausing for `timeWindow` milliseconds. Setting the `uniformDistribution`
 option is mainly useful in a situation where the flow of rate limit function
