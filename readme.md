@@ -71,6 +71,9 @@ async function f() {
 
 #### Constructor(nr, { initFn, pauseFn, resumeFn, capacity })
 
+Creates a semaphore object. The first argument is mandatory and the second
+argument is optional.
+
 - `nr` The maximum number of callers allowed to acquire the semaphore
   concurrently.
 - `initFn` Function that is used to initialize the tokens used to manage
@@ -109,11 +112,11 @@ Release the semaphore, thus increment the number of free execution slots. If
 `initFn` is used then the `token` returned by `acquire()` should be given as
 an argument when calling this function.
 
-### RateLimit(rps, {timeUnit, uniformDistribution})
+### RateLimit(rps, { timeUnit, uniformDistribution })
 
 Creates a rate limiter function that blocks with a promise whenever the rate
 limit is hit and resolves the promise once the call rate is within the limit
-set by `rps`.
+set by `rps`. The second argument is optional.
 
 The `timeUnit` is an optional argument setting the width of the rate limiting
 window in milliseconds. The default `timeUnit` is `1000 ms`, therefore making
