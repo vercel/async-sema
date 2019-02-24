@@ -41,9 +41,9 @@ async function g() {
 }
 
 async function h() {
-	console.log('Equal distribution of requests over time');
+	console.log('Uniform distribution of requests over time');
 	const n = 50;
-	const lim = RateLimit(5, { equalDistribution: true });
+	const lim = RateLimit(5, { uniformDistribution: true });
 	const start = process.hrtime();
 
 	for (let i = 0; i < n; i++) {
