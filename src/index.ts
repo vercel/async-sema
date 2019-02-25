@@ -209,14 +209,14 @@ export function RateLimit(
 	rps: number,
 	{
 		timeUnit = 1000,
-		equalDistribution = false
+		uniformDistribution = false
 	}: {
 		timeUnit?: number;
-		equalDistribution?: boolean;
+		uniformDistribution?: boolean;
 	} = {}
 ) {
-	const sema = new Sema(equalDistribution ? 1 : rps);
-	const delay = equalDistribution ? timeUnit / rps : timeUnit;
+	const sema = new Sema(uniformDistribution ? 1 : rps);
+	const delay = uniformDistribution ? timeUnit / rps : timeUnit;
 
 	return async function rl() {
 		await sema.acquire();
