@@ -12,7 +12,7 @@ variable containing the number of available resources. This enables an
 interesting application of managing the actual resources with the semaphore
 object itself. To make it practical the constructor for Sema includes an option
 for providing an init function for the semaphore tokens. Use of a custom token
-initializer is demonstrated in `example1.js`.
+initializer is demonstrated in `pooling.js`.
 
 ## Usage
 
