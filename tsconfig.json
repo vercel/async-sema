@@ -12,7 +12,7 @@
     "noUnusedParameters": true,
     "outDir": "./lib",
     "strict": true,
-    "target": "ES5",
+    "target": "ES2017",
     "types": ["jest","node"],
     "typeRoots": [
       "./types",
