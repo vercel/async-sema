@@ -137,6 +137,11 @@ export class Sema {
 			capacity?: number;
 		} = {}
 	) {
+		if ((nr | 0) !== nr) {
+			throw new TypeError(
+				'nr (' + nr + ') should be an integer'
+			);
+		}
 		if (isFn(pauseFn) !== isFn(resumeFn)) {
 			throw new Error(
 				'pauseFn and resumeFn must be both set for pausing'
