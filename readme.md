@@ -1,18 +1,18 @@
 # async-sema
 
-This is a semaphore implementation for use with `async` and `await`. The implementation
-follows the traditional definition of a semaphore rather than the definition of
-an asynchronous semaphore. Where as the latter one generally allows every
-defined task to proceed immediately and synchronizes at the end, async-sema
-allows only a selected number of tasks to proceed at once while the rest will
-remain waiting.
+This is a semaphore implementation for use with `async` and `await`. The
+implementation follows the traditional definition of a semaphore rather than the
+definition of an asynchronous semaphore seen in some js community examples.
+Where as the latter one generally allows every defined task to proceed
+immediately and synchronizes at the end, async-sema allows only a selected
+number of tasks to proceed at once while the rest will remain waiting.
 
 Async-sema manages the semaphore count as a list of tokens instead of a single
 variable containing the number of available resources. This enables an
 interesting application of managing the actual resources with the semaphore
 object itself. To make it practical the constructor for Sema includes an option
 for providing an init function for the semaphore tokens. Use of a custom token
-initializer is demonstrated in `pooling.js`.
+initializer is demonstrated in `examples/pooling.js`.
 
 ## Usage
 
@@ -22,10 +22,16 @@ Firstly, add the package to your project's `dependencies`:
 npm install --save async-sema
 ```
 
-Then start using it like shown [here](./examples).
+or
+
+```bash
+yarn add async-sema
+```
+
+Then start using it like shown in the following example. Check more
+use case examples [here](./examples).
 
 ## Example
-See [/examples](./examples) for more use cases.
 
 ```js
 const { Sema } = require('async-sema');
@@ -122,9 +128,9 @@ The `timeUnit` is an optional argument setting the width of the rate limiting
 window in milliseconds. The default `timeUnit` is `1000 ms`, therefore making
 the `rps` argument act as requests per second limit.
 
-The `uniformDistribution` argument enforces a discrete uniform distribution over time,
-instead of the default that allows hitting the function `rps` time and then
-pausing for `timeWindow` milliseconds. Setting the `uniformDistribution`
+The `uniformDistribution` argument enforces a discrete uniform distribution over
+time, instead of the default that allows hitting the function `rps` time and
+then pausing for `timeWindow` milliseconds. Setting the `uniformDistribution`
 option is mainly useful in a situation where the flow of rate limit function
 calls is continuous and and occuring faster than `timeUnit` (e.g. reading a
 file) and not enabling it would cause the maximum number of calls to resolve
