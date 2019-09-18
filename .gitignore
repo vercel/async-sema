@@ -7,3 +7,7 @@ lib
 # logs
 npm-debug.log
 yarn-error.log
+
+# lock files are not needed with libraries
+package-lock.json
+yarn.lock
