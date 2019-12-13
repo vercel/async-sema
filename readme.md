@@ -106,6 +106,11 @@ example before a process will terminate.
 Returns the number of callers waiting on the semaphore, i.e. the number of
 pending promises.
 
+#### tryAcquire()
+
+Attempt to acquire a token from the semaphore, if one is available immediately.
+Otherwise, return `undefined`.
+
 #### async acquire()
 
 Acquire a token from the semaphore, thus decrement the number of available
