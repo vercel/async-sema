@@ -29,6 +29,18 @@ test('nr of available semas seems correct', async () => {
 	expect(s.nrWaiting()).toEqual(0);
 });
 
+test('tryAcquire returns undefined', async () => {
+	const s = new Sema(2);
+
+	await s.acquire();
+	expect(s.tryAcquire()).toBeDefined();
+	expect(s.tryAcquire()).toBeUndefined();
+
+	s.release();
+	expect(s.tryAcquire()).toBeDefined();
+	expect(s.tryAcquire()).toBeUndefined();
+});
+
 test('Pausing works', () => {
 	const pauseFn = jest.fn();
 	const resumeFn = jest.fn();
