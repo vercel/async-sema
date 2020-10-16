@@ -28,6 +28,9 @@
     "prettier": "prettier --write --single-quote './{src,test}/**/*.ts'",
     "test": "jest"
   },
+  "dependencies": {
+    "events": "3.2.0"
+  },
   "devDependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
