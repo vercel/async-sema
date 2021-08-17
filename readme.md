@@ -154,4 +154,4 @@ Inside the project where you want to test your clone of the package, you can now
 
 ## Author
 
-Olli Vanhoja ([@OVanhoja](https://twitter.com/OVanhoja)) - [▲ZEIT](https://zeit.co)
+Olli Vanhoja ([@OVanhoja](https://twitter.com/OVanhoja))
