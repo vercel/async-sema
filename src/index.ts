@@ -129,7 +129,7 @@ export class Sema {
 			initFn = defaultInit,
 			pauseFn,
 			resumeFn,
-			capacity = 10
+			capacity = 10,
 		}: {
 			initFn?: () => any;
 			pauseFn?: () => void;
@@ -152,7 +152,7 @@ export class Sema {
 		this.resumeFn = resumeFn;
 		this.paused = false;
 
-		this.releaseEmitter.on('release', token => {
+		this.releaseEmitter.on('release', (token) => {
 			const p = this.waiting.shift();
 			if (p) {
 				p.resolve(token);
@@ -213,7 +213,7 @@ export function RateLimit(
 	rps: number,
 	{
 		timeUnit = 1000,
-		uniformDistribution = false
+		uniformDistribution = false,
 	}: {
 		timeUnit?: number;
 		uniformDistribution?: boolean;

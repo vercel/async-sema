@@ -70,7 +70,7 @@ test('initFn is called properly', () => {
 test('Tokens are returned properly', async () => {
 	let nrTokens = 0;
 	const s = new Sema(3, {
-		initFn: () => nrTokens++
+		initFn: () => nrTokens++,
 	});
 
 	const tokens = await Promise.all([s.acquire(), s.acquire(), s.acquire()]);
