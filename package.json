@@ -4,7 +4,7 @@
   "description": "Semaphore using `async` and `await`",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/verce;/async-sema.git"
+    "url": "git+https://github.com/vercel/async-sema.git"
   },
   "author": "Olli Vanhoja",
   "keywords": [
@@ -12,9 +12,9 @@
     "async",
     "await"
   ],
-  "homepage": "https://github.com/verce;/async-sema",
+  "homepage": "https://github.com/vercel/async-sema",
   "bugs": {
-    "url": "https://github.com/verce;/async-sema/issues"
+    "url": "https://github.com/vercel/async-sema/issues"
   },
   "license": "MIT",
   "files": [
