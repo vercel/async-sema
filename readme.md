@@ -85,7 +85,7 @@ argument is optional.
 - `initFn` Function that is used to initialize the tokens used to manage
   the semaphore. The default is `() => '1'`.
 - `pauseFn` An optional fuction that is called to opportunistically request
-  pausing the the incoming stream of data, instead of piling up waiting
+  pausing the incoming stream of data, instead of piling up waiting
   promises and possibly running out of memory.
   See [examples/pausing.js](./examples/pausing.js).
 - `resumeFn` An optional function that is called when there is room again
@@ -140,9 +140,8 @@ option is mainly useful in a situation where the flow of rate limit function
 calls is continuous and and occuring faster than `timeUnit` (e.g. reading a
 file) and not enabling it would cause the maximum number of calls to resolve
 immediately (thus exhaust the limit immediately) and therefore the next bunch
-calls would need to wait for `timeWindow` milliseconds. However if the flow is
-sparse then this option may make the
-code run slower with no advantages.
+of calls would need to wait for `timeWindow` milliseconds. However if the flow
+is sparse then this option may make the code run slower with no advantages.
 
 ## Contributing
 
