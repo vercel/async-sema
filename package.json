@@ -1,6 +1,6 @@
 {
   "name": "async-sema",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Semaphore using `async` and `await`",
   "repository": {
     "type": "git",
@@ -29,13 +29,13 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/jest": "27.0.1",
+    "@types/jest": "29.2.3",
     "@types/node": "16.6.1",
-    "jest": "27.0.6",
+    "jest": "29.3.1",
     "lint-staged": "11.1.2",
     "pre-commit": "1.2.2",
     "prettier": "2.3.2",
-    "ts-jest": "27.0.4",
+    "ts-jest": "29.0.3",
     "typescript": "4.3.5"
   },
   "pre-commit": "lint:staged",
