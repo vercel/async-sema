@@ -30,11 +30,11 @@ function getCapacity(capacity: number) {
 
 // Deque is based on https://github.com/petkaantonov/deque/blob/master/js/deque.js
 // Released under the MIT License: https://github.com/petkaantonov/deque/blob/6ef4b6400ad3ba82853fdcc6531a38eb4f78c18c/LICENSE
-class Deque {
+class Deque<T> {
 	private _capacity: number;
 	private _length: number;
 	private _front: number;
-	private arr: Array<any>;
+	private arr: Array<T | void>;
 
 	constructor(capacity: number) {
 		this._capacity = getCapacity(capacity);
@@ -43,7 +43,7 @@ class Deque {
 		this.arr = [];
 	}
 
-	push(item: any): number {
+	push(item: T): number {
 		const length = this._length;
 
 		this.checkCapacity(length + 1);
@@ -54,7 +54,7 @@ class Deque {
 		return length + 1;
 	}
 
-	pop() {
+	pop(): T | void {
 		const length = this._length;
 		if (length === 0) {
 			return void 0;
@@ -109,14 +109,17 @@ function isFn(x: any) {
 	return typeof x === 'function';
 }
 
-function defaultInit() {
-	return '1';
+function defaultInit<T = any>(): T {
+	return '1' as any;
 }
 
-export class Sema {
+export class Sema<T = any> {
 	private nrTokens: number;
-	private free: Deque;
-	private waiting: Deque;
+	private free: Deque<T>;
+	private waiting: Deque<{
+		resolve: (value: T | PromiseLike<T>) => void;
+		reject: (reason?: any) => void;
+	}>;
 	private releaseEmitter: EventEmitter;
 	private noTokens: boolean;
 	private pauseFn?: () => void;
@@ -152,7 +155,7 @@ export class Sema {
 		this.resumeFn = resumeFn;
 		this.paused = false;
 
-		this.releaseEmitter.on('release', (token) => {
+		this.releaseEmitter.on('release', (token: T) => {
 			const p = this.waiting.shift();
 			if (p) {
 				p.resolve(token);
@@ -171,18 +174,18 @@ export class Sema {
 		}
 	}
 
-	tryAcquire(): any | undefined {
+	tryAcquire(): T | void {
 		return this.free.pop();
 	}
 
-	async acquire(): Promise<any> {
+	async acquire(): Promise<T> {
 		let token = this.tryAcquire();
 
 		if (token !== void 0) {
 			return token;
 		}
 
-		return new Promise((resolve, reject) => {
+		return new Promise<T>((resolve, reject) => {
 			if (this.pauseFn && !this.paused) {
 				this.paused = true;
 				this.pauseFn();
@@ -192,11 +195,11 @@ export class Sema {
 		});
 	}
 
-	release(token?: any): void {
+	release(token?: T): void {
 		this.releaseEmitter.emit('release', this.noTokens ? '1' : token);
 	}
 
-	drain(): Promise<any[]> {
+	drain(): Promise<T[]> {
 		const a = new Array(this.nrTokens);
 		for (let i = 0; i < this.nrTokens; i++) {
 			a[i] = this.acquire();
