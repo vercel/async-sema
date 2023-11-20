@@ -21,5 +21,5 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["./**/*.ts"]
 }
