@@ -17,7 +17,7 @@ jest.mock('../src/Sema', () => {
   };
 });
 
-describe('General', () => {
+describe('createRateLimiter', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
