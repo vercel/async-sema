@@ -1,2 +1,2 @@
 export { Sema } from './Sema';
-export { RateLimit } from './RateLimit';
+export { createRateLimiter } from './Utils';

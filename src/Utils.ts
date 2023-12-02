@@ -1,7 +1,7 @@
 import { Sema } from './Sema';
 
-export function RateLimit(
-  rps: number,
+export function createRateLimiter(
+  rptu: number,
   {
     timeUnit = 1000,
     uniformDistribution = false,
@@ -9,11 +9,11 @@ export function RateLimit(
     timeUnit?: number;
     uniformDistribution?: boolean;
   } = {},
-) {
-  const sema = new Sema(uniformDistribution ? 1 : rps);
-  const delay = uniformDistribution ? timeUnit / rps : timeUnit;
+): () => Promise<void> {
+  const sema = new Sema(uniformDistribution ? 1 : rptu);
+  const delay = uniformDistribution ? timeUnit / rptu : timeUnit;
 
-  return async function rl() {
+  return async function limiter() {
     await sema.acquire();
     setTimeout(() => sema.release(), delay);
   };

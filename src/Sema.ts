@@ -3,18 +3,18 @@ import { Deque } from './Deque';
 
 const DEFAULT_INIT_VALUE = '1';
 
-function isFn(x: any) {
+function isFn(x: unknown) {
   return typeof x === 'function';
 }
 
 export class Sema<T = string> {
-  private nrTokens: number;
+  private maxConcurrency: number;
 
-  private free: Deque<T>;
+  private freeQ: Deque<T>;
 
-  private waiting: Deque<{
+  private waitingQ: Deque<{
     resolve: (value: T | PromiseLike<T>) => void;
-    reject: (reason?: any) => void;
+    reject: (reason?: string) => void;
   }>;
 
   private releaseEmitter: EventEmitter;
@@ -28,7 +28,7 @@ export class Sema<T = string> {
   private paused: boolean;
 
   constructor(
-    nr: number,
+    maxConcurrency: number,
     {
       initFn,
       pauseFn,
@@ -45,9 +45,9 @@ export class Sema<T = string> {
       throw new Error('pauseFn and resumeFn must be both set for pausing');
     }
 
-    this.nrTokens = nr;
-    this.free = new Deque(nr);
-    this.waiting = new Deque(capacity);
+    this.maxConcurrency = maxConcurrency;
+    this.freeQ = new Deque(maxConcurrency);
+    this.waitingQ = new Deque(capacity);
     this.releaseEmitter = new EventEmitter();
     this.noTokens = initFn == null;
     this.pauseFn = pauseFn;
@@ -55,7 +55,8 @@ export class Sema<T = string> {
     this.paused = false;
 
     this.releaseEmitter.on('release', (token: T) => {
-      const p = this.waiting.shift();
+      const p = this.waitingQ.shift();
+
       if (p) {
         p.resolve(token);
       } else {
@@ -64,19 +65,19 @@ export class Sema<T = string> {
           this.resumeFn();
         }
 
-        this.free.push(token);
+        this.freeQ.push(token);
       }
     });
 
-    for (let i = 0; i < nr; i += 1) {
+    for (let i = 0; i < maxConcurrency; i += 1) {
       const init: T = initFn ? initFn() : (DEFAULT_INIT_VALUE as T);
 
-      this.free.push(init);
+      this.freeQ.push(init);
     }
   }
 
   tryAcquire(): T | void {
-    return this.free.pop();
+    return this.freeQ.pop();
   }
 
   async acquire(): Promise<T> {
@@ -92,7 +93,7 @@ export class Sema<T = string> {
         this.pauseFn();
       }
 
-      this.waiting.push({ resolve, reject });
+      this.waitingQ.push({ resolve, reject });
     });
   }
 
@@ -101,16 +102,16 @@ export class Sema<T = string> {
   }
 
   drain(): Promise<T[]> {
-    const a = new Array(this.nrTokens);
+    const a = new Array<Promise<T>>(this.maxConcurrency);
 
-    for (let i = 0; i < this.nrTokens; i += 1) {
+    for (let i = 0; i < this.maxConcurrency; i += 1) {
       a[i] = this.acquire();
     }
 
     return Promise.all(a);
   }
 
-  nrWaiting(): number {
-    return this.waiting.length;
+  waiting(): number {
+    return this.waitingQ.length;
   }
 }
