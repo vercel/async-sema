@@ -18,7 +18,7 @@
   </a>
 </p>
 
-> Maintained version of [vercel/async-sema](https://github.com/vercel/async-sema/). This is a semaphore implementation for use with `async` and `await`. The implementation follows the traditional definition of a semaphore rather than the definition of an asynchronous semaphore seen in some js community examples. Where as the latter one generally allows every defined task to proceed immediately and synchronizes at the end, Sema4 allows only a selected number of tasks to proceed at once while the rest will remain waiting. Sema4 manages the semaphore count as a list of tokens instead of a single variable containing the number of available resources. This enables an interesting application of managing the actual resources with the semaphore object itself. To make it practical the constructor for Sema4 includes an option for providing an init function for the semaphore tokens. Use of a custom token initializer is demonstrated in `examples/pooling.js`.
+> A semaphore implementation using promises. A Fork of [vercel/async-sema](https://github.com/vercel/async-sema/).
 
 ## Table of Contents
 
