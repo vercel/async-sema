@@ -1,3 +1,5 @@
+// Deque is based on https://github.com/petkaantonov/deque/blob/master/js/deque.js
+
 /*eslint-disable*/
 function arrayMove(src: any[], srcIndex: number, dst: any[], dstIndex: number, len: number) {
   for (let j = 0; j < len; ++j) {
