@@ -1,0 +1,65 @@
+name: Node.js CI
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    runs:
+      steps:
+        - name: Setup
+          uses: './.github/actions/setup'
+
+        - name: Install dependencies
+          run: yarn --frozen-lockfile
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup
+        uses: './.github/actions/setup'
+      - name: Build package
+        run: yarn build
+      - name: Temporarily save Docker image
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist
+          retention-days: 1
+
+  lint&format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup
+        uses: './.github/actions/setup'
+      - name: Lint and Format
+        run: yarn lint && yarn format
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup
+        uses: './.github/actions/setup'
+      - name: Run unit tests
+        run: yarn test
+
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [lint, build, test]
+    steps:
+      - name: Setup
+        uses: './.github/actions/setup'
+      - name: Retrieve saved build files
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist
+      - name: Deploy
+        run: yarn release
