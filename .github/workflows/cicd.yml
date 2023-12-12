@@ -31,7 +31,7 @@ jobs:
           path: dist
           retention-days: 1
 
-  lint&format:
+  lint and format:
     runs-on: ubuntu-latest
     needs: [install]
 
