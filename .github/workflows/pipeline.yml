@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
-
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
@@ -20,6 +21,8 @@ jobs:
     needs: [install]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Build package
@@ -36,6 +39,8 @@ jobs:
     needs: [install]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Lint
@@ -46,6 +51,8 @@ jobs:
     needs: [install]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Format
@@ -56,6 +63,8 @@ jobs:
     needs: [install]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run unit tests
@@ -66,6 +75,8 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: [lint, format, build, test]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Retrieve saved build files
