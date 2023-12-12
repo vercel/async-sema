@@ -8,13 +8,12 @@ jobs:
   install:
     runs-on: ubuntu-latest
 
-    runs:
-      steps:
-        - name: Setup
-          uses: './.github/actions/setup'
+    steps:
+      - name: Setup
+        uses: './.github/actions/setup'
 
-        - name: Install dependencies
-          run: yarn --frozen-lockfile
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
 
   build:
     runs-on: ubuntu-latest
