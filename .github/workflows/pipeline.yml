@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Setup
-        uses: './.github/actions/setup'
+        uses: ./.github/actions/setup
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Setup
-        uses: './.github/actions/setup'
+        uses: ./.github/actions/setup
       - name: Build package
         run: yarn build
       - name: Temporarily save Docker image
@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Setup
-        uses: './.github/actions/setup'
+        uses: ./.github/actions/setup
       - name: Lint
         run: yarn lint
 
@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: Setup
-        uses: './.github/actions/setup'
+        uses: ./.github/actions/setup
       - name: Format
         run: yarn format
 
@@ -57,7 +57,7 @@ jobs:
 
     steps:
       - name: Setup
-        uses: './.github/actions/setup'
+        uses: ./.github/actions/setup
       - name: Run unit tests
         run: yarn test
 
@@ -67,7 +67,7 @@ jobs:
     needs: [lint, format, build, test]
     steps:
       - name: Setup
-        uses: './.github/actions/setup'
+        uses: ./.github/actions/setup
       - name: Retrieve saved build files
         uses: actions/download-artifact@v3
         with:
