@@ -1,0 +1,19 @@
+name: Package Size
+
+on:
+  pull_request:
+
+jobs:
+  pkgsize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Package size report
+        uses: pkg-size/action@v1
+        with:
+          build-command: yarn build
+          display-size: uncompressed, gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
