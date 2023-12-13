@@ -27,10 +27,14 @@ jobs:
           name: build-artifacts
           path: dist
           retention-days: 1
+      - name: Log
+        run: ls -al dist
+
       - name: Package size report
         uses: pkg-size/action@v1
         with:
-          mode: head-only
+          build-command: false
+          display-size: uncompressed, gzip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
