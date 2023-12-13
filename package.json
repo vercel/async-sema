@@ -1,6 +1,6 @@
 {
   "name": "sema4",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Semaphore using `async` and `await`",
   "keywords": [
     "semaphore",
