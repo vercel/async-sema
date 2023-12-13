@@ -1,13 +1,13 @@
-# dependencies
 node_modules
-
-# build results
-lib
-
-# logs
 npm-debug.log
-yarn-error.log
+dist
+coverage
+reports
 
-# lock files are not needed with libraries
-package-lock.json
-yarn.lock
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

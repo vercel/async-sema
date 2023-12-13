@@ -1,23 +1,24 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "esModuleInterop": true,
-    "lib": ["esnext"],
-    "module": "CommonJS",
+    "target": "es2022",
+    "module": "es2022",
+    "noEmit": true,
+    "pretty": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "allowJs": true,
+
     "moduleResolution": "node",
     "resolveJsonModule": true,
+
+    "strictPropertyInitialization": true,
     "strictNullChecks": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./lib",
-    "strict": true,
-    "target": "ES2017",
-    "types": ["jest","node"],
-    "typeRoots": [
-      "./types",
-      "./node_modules/@types"
-    ]
-  },
-  "include": ["./src", "./types"]
+    "noImplicitReturns": true
+  }
 }

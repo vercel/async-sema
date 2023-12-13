@@ -1,0 +1,81 @@
+name: Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [install]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Build package
+        run: yarn build
+      - name: Temporarily save build files
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist
+          retention-days: 1
+      # - name: Package size report
+      #   uses: pkg-size/action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  lint:
+    runs-on: ubuntu-latest
+    needs: [install]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Lint
+        run: yarn lint
+
+  format:
+    runs-on: ubuntu-latest
+    needs: [install]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Format
+        run: yarn format
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [install]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Run unit tests
+        run: yarn test:unit
+      - uses: paambaati/codeclimate-action@v5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [lint, format, build, test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Retrieve saved build files
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist
+      - name: Deploy
+        run: yarn release

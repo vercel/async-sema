@@ -1,0 +1,58 @@
+noVersionPrefix: true
+
+plugins:
+  - npm
+  - released
+  - first-time-contributor
+  - all-contributors
+
+prereleaseBranches:
+  - next
+
+noDefaultLabels: true
+
+labels:
+  - name: breaking
+    changelogTitle: 💥 Breaking Change
+    description: Changes are not backwards compatible
+    releaseType: major
+
+  - name: type:feature
+    changelogTitle: ✨ Feature
+    description: Changes add a new feature
+    releaseType: minor
+
+  - name: type:bug
+    changelogTitle: 🐛 Bug Fix
+    description: Changes fix a minor bug
+    releaseType: minor
+
+  - name: type:hot fix
+    changelogTitle: 🚑 Hot Fix
+    description: Changes fix a critical bug
+    releaseType: minor
+
+  - name: type:technical debt
+    changelogTitle: 🔨 Technical Debt
+    description: Changes only affect the internal code, improving performance/quality
+    releaseType: patch
+
+  - name: type:security
+    changelogTitle: 🔒 Security
+    description: Changes improve the code security
+    releaseType: patch
+
+  - name: type:dependencies
+    changelogTitle: ↕️ Dependencies
+    description: Changes upgrade or remove dependencies
+    releaseType: patch
+
+  - name: type:testing
+    changelogTitle: 🚨 Tests
+    description: Changes affect test code
+    releaseType: none
+
+  - name: type:documentation
+    changelogTitle: 📚 Documentation
+    description: Changes only affect the documentation
+    releaseType: none

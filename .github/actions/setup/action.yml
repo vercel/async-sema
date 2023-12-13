@@ -1,0 +1,13 @@
+name: 'Setup'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'yarn'
+    - name: Install dependencies
+      run: yarn --immutable
+      shell: bash
