@@ -29,6 +29,8 @@ jobs:
           retention-days: 1
       - name: Package size report
         uses: pkg-size/action@v1
+        with:
+          mode: head-only
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
