@@ -27,10 +27,10 @@ jobs:
           name: build-artifacts
           path: dist
           retention-days: 1
-      - name: Package size report
-        uses: pkg-size/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Package size report
+      #   uses: pkg-size/action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     needs: [install]
