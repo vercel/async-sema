@@ -1,3 +1,15 @@
+# 0.0.4 (Wed Dec 13 2023)
+
+#### 🔨 Technical Debt
+
+- Removing persistence from checkout creds [#6](https://github.com/jdalrymple/sema4/pull/6) ([@jdalrymple](https://github.com/jdalrymple))
+
+#### Authors: 1
+
+- Justin Dalrymple ([@jdalrymple](https://github.com/jdalrymple))
+
+---
+
 # 0.0.3 (Wed Dec 13 2023)
 
 #### 🔨 Technical Debt
