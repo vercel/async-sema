@@ -1,8 +1,8 @@
 name: Pipeline
 
 on:
-  - push
-  - pull_request
+  workflow_dispatch:
+  push:
 
 jobs:
   install:
