@@ -31,7 +31,8 @@
 ## Features
 
 - **Universal** - Works in all modern browsers, [Node.js](https://nodejs.org/), and [Deno](https://deno.land/) and supports [CLI](https://www.npmjs.com/package/@gitbeaker/cli) usage.
-- **Tested** - Greater than 80% test coverage.
+- **Zero Dependencies** - Absolutely no dependencies, keeping the package tiny (24kb).
+- **Tested** - Greater than 85% test coverage.
 - **Typed** - Out of the box TypeScript declarations.
 
 ## Usage
