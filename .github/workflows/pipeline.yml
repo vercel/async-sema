@@ -69,6 +69,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/setup
       - name: Retrieve saved build files
