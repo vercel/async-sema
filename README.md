@@ -158,3 +158,16 @@ async function bar() {
   }
 }
 ```
+
+## Contributors
+
+In addition to the contributors of the parent repository [vercel/async-sema](https://github.com/vercel/async-sema), these lovely people have helped keep this library going.
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
