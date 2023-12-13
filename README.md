@@ -18,7 +18,7 @@
   </a>
 </p>
 
-> A semaphore implementation using promises. A Fork of [vercel/async-sema](https://github.com/vercel/async-sema/).
+> A semaphore implementation using promises. Forked from [vercel/async-sema](https://github.com/vercel/async-sema/).
 
 ## Table of Contents
 
