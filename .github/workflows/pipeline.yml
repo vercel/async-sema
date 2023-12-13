@@ -68,6 +68,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/setup
       - name: Retrieve saved build files
         uses: actions/download-artifact@v3
