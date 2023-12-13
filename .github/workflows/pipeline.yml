@@ -57,6 +57,9 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Run unit tests
         run: yarn test:unit
+      - uses: paambaati/codeclimate-action@v5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
   release:
     runs-on: ubuntu-latest
