@@ -3,9 +3,7 @@
   "projectOwner": "jdalrymple",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md",
-  ],
+  "files": ["README.md"],
   "imageSize": 25,
   "commit": false,
   "wrapperTemplate": "<p><%= bodyContent %></p>",
@@ -18,7 +16,7 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/3743662?v=4",
       "profile": "https://github.com/jdalrymple",
       "contributions": ["code", "review", "maintenance", "bug", "ideas", "doc", "test", "infra"]
-    },
+    }
   ],
   "contributorsPerLine": 26
 }
