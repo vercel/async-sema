@@ -166,6 +166,11 @@ In addition to the contributors of the parent repository [vercel/async-sema](htt
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<p>
+    <tr>
+      <td align="center" valign="top" width="3.84%"><a href="https://github.com/jdalrymple"><img src="https://images.weserv.nl/?url=https://avatars3.githubusercontent.com/u/3743662?v=4&h=25&w=25&fit=cover&mask=circle&maxage=7d" alt="Justin Dalrymple"/></td>
+    </tr>
+</p>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
