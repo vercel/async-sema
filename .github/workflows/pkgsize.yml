@@ -16,4 +16,4 @@ jobs:
           build-command: yarn build
           display-size: uncompressed, gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
