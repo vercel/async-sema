@@ -80,8 +80,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_USERNAME: ${{ github.actor }}
         run: |
           npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-          git config --global user.name "Autobot"
-          git config --global user.email "ci@github.com"
+          git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
+          git config --global user.name "${GH_USERNAME}"
           yarn release

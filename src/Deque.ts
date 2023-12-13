@@ -1,7 +1,7 @@
 // Deque is based on https://github.com/petkaantonov/deque/blob/master/js/deque.js
-
+// Released under the MIT License: https://github.com/petkaantonov/deque/blob/6ef4b6400ad3ba82853fdcc6531a38eb4f78c18c/LICENSE
 /*eslint-disable*/
-function arrayMove(src: any[], srcIndex: number, dst: any[], dstIndex: number, len: number) {
+export function arrayMove(src: any[], srcIndex: number, dst: any[], dstIndex: number, len: number) {
   for (let j = 0; j < len; ++j) {
     dst[j + dstIndex] = src[j + srcIndex];
     src[j + srcIndex] = void 0;
@@ -16,15 +16,18 @@ function pow2AtLeast(n: number) {
   n |= n >> 4;
   n |= n >> 8;
   n |= n >> 16;
+
   return n + 1;
 }
 
-function getCapacity(capacity: number) {
-  return pow2AtLeast(Math.min(Math.max(16, capacity), 1073741824));
+export const MIN_CAPACITY = 4;
+export const MAX_CAPACITY = 1073741824;
+export const RESIZE_MULTIPLER = 1;
+
+export function getCapacity(capacity: number) {
+  return pow2AtLeast(Math.min(Math.max(MIN_CAPACITY, capacity), MAX_CAPACITY));
 }
 
-// Deque is based on https://github.com/petkaantonov/deque/blob/master/js/deque.js
-// Released under the MIT License: https://github.com/petkaantonov/deque/blob/6ef4b6400ad3ba82853fdcc6531a38eb4f78c18c/LICENSE
 export class Deque<T> {
   private _capacity: number;
 
@@ -34,8 +37,8 @@ export class Deque<T> {
 
   private arr: Array<T | void>;
 
-  constructor(capacity: number) {
-    this._capacity = getCapacity(capacity);
+  constructor(initialCapacity: number = 4) {
+    this._capacity = getCapacity(initialCapacity);
     this._length = 0;
     this._front = 0;
     this.arr = [];
@@ -93,7 +96,7 @@ export class Deque<T> {
 
   private checkCapacity(size: number) {
     if (this._capacity < size) {
-      this.resizeTo(getCapacity(this._capacity * 1.5 + 16));
+      this.resizeTo(getCapacity(this._capacity * RESIZE_MULTIPLER + MIN_CAPACITY));
     }
   }
 

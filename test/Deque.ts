@@ -1,82 +1,126 @@
-import { Sema } from '../src/Sema';
+import { Deque, MAX_CAPACITY, getCapacity } from '../src/Deque';
 
-import { createRateLimiter } from '../src/Utils';
-
-jest.useFakeTimers();
-jest.spyOn(global, 'setTimeout');
-
-const acquireFn = jest.fn();
-const releaseFn = jest.fn();
-
-jest.mock('../src/Sema', () => {
-  return {
-    Sema: jest.fn(() => ({
-      acquire: acquireFn,
-      release: releaseFn,
-    })),
-  };
+describe('MAX_CAPACITY', () => {
+  it('should restrict max capacity to 1gb', () => {
+    expect(MAX_CAPACITY).toBe(1073741824);
+  });
 });
 
-describe('General', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+describe('getCapacity', () => {
+  it('should accept a initial capacity for the queue, with a default of 4 if passed value is less than 4', () => {
+    const d = getCapacity(2);
+
+    expect(d).toBe(4);
   });
 
-  it('should create a Sema instance with one maxConcurrency if uniform distribution is true', () => {
-    createRateLimiter(3, { uniformDistribution: true });
+  it('should increment the capacity through a bit shift for every value greater than the previous bit shift limit', () => {
+    const d1 = getCapacity(5);
 
-    expect(Sema).toHaveBeenCalledWith(1);
+    expect(d1).toBe(8);
+
+    const d2 = getCapacity(17);
+
+    expect(d2).toBe(32);
   });
 
-  it('should create a Sema instance with passed maxConcurrency if uniform distribution is false', () => {
-    createRateLimiter(3, { uniformDistribution: false });
+  it('should restrict capcity to max buffer size (MAX_CAPACITY)', () => {
+    const d1 = getCapacity(MAX_CAPACITY + 1);
 
-    expect(Sema).toHaveBeenCalledWith(3);
+    expect(d1).toBe(MAX_CAPACITY);
+  });
+});
+
+describe('Deque.constructor', () => {
+  it('should accept no arguments and default to a capacity of 4', () => {
+    const d = new Deque();
+
+    /* eslint-disable @typescript-eslint/ban-ts-comment, no-underscore-dangle */
+
+    // @ts-expect-error
+    expect(d._capacity).toBe(4);
+
+    // @ts-expect-error
+    expect(d._length).toBe(0);
+
+    // @ts-expect-error
+    expect(d.arr.length).toBe(0);
+
+    // @ts-expect-error
+    expect(d._front).toBe(0);
+
+    /* eslint-enable */
   });
 
-  it('should create a Sema instance with passed maxConcurrency if a uniform distribution is not passed', () => {
-    createRateLimiter(3);
+  it('should accept a capacity argument', () => {
+    const d = new Deque(32);
 
-    expect(Sema).toHaveBeenCalledWith(3);
+    /* eslint-disable @typescript-eslint/ban-ts-comment, no-underscore-dangle */
+
+    // @ts-expect-error
+    expect(d._capacity).toBe(32);
+
+    // @ts-expect-error
+    expect(d._length).toBe(0);
+
+    // @ts-expect-error
+    expect(d.arr.length).toBe(0);
+
+    // @ts-expect-error
+    expect(d._front).toBe(0);
+
+    /* eslint-enable */
   });
 
-  it('should create a timeout using default timeUnit as delay if uniformDistribution is not passed', async () => {
-    const limiter = createRateLimiter(3);
+  it('should default to 4 capacity if capacity passed is lesser', () => {
+    const d = new Deque(2);
 
-    await limiter();
+    /* eslint-disable @typescript-eslint/ban-ts-comment, no-underscore-dangle */
 
-    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 1000);
+    // @ts-expect-error
+    expect(d._capacity).toBe(4);
+
+    // @ts-expect-error
+    expect(d._length).toBe(0);
+
+    // @ts-expect-error
+    expect(d.arr.length).toBe(0);
+
+    // @ts-expect-error
+    expect(d._front).toBe(0);
+
+    /* eslint-enable */
+  });
+});
+
+describe('Deque.push', () => {
+  it('should accept an item to add to the queue and increment the length', () => {
+    const d = new Deque();
+
+    d.push(1);
+
+    expect(d.length).toBe(1);
   });
 
-  it('should create a timeout using passed timeUnit as delay if uniformDistribution is not passed', async () => {
-    const limiter = createRateLimiter(3, { timeUnit: 2000 });
+  it('should update capacity if more than capacity items are added', () => {
+    const d = new Deque();
 
-    await limiter();
+    d.push(1);
+    d.push(1);
+    d.push(1);
+    d.push(1);
+    const finalLength = d.push(1);
 
-    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 2000);
-  });
+    expect(finalLength).toBe(5);
+    expect(d.length).toBe(5);
 
-  it('should create a timeout using passed timeUnit as delay if uniformDistribution is false', async () => {
-    const limiter = createRateLimiter(3, { uniformDistribution: false, timeUnit: 2000 });
+    /* eslint-disable @typescript-eslint/ban-ts-comment, no-underscore-dangle */
 
-    await limiter();
+    // @ts-expect-error
+    expect(d._capacity).toBe(8);
 
-    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 2000);
-  });
+    // @ts-expect-error
+    expect(d.arr).toMatchObject([1, 1, 1, 1, 1]);
 
-  it('should create a timeout using passed timeUnit divided by requests per time unit if uniformDistribution is true', async () => {
-    const limiter = createRateLimiter(2, { uniformDistribution: true, timeUnit: 10000 });
-
-    await limiter();
-
-    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 5000);
-  });
-
-  it('should call Sema.aquire in limiter function', async () => {
-    const limiter = createRateLimiter(2);
-
-    await limiter();
-
-    expect(acquireFn).toHaveBeenCalledTimes(1);
+    /* eslint-enable */
   });
 });
