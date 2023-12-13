@@ -5,7 +5,6 @@ plugins:
   - released
   - first-time-contributor
   - all-contributors
-  - ./scripts/auto-before-commit-changelog-plugin.js
 
 prereleaseBranches:
   - next
