@@ -27,9 +27,11 @@ jobs:
           name: build-artifacts
           path: dist
           retention-days: 1
-      - name: Log
-        run: ls -al dist
-
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
       - name: Package size report
         uses: pkg-size/action@v1
         with:
