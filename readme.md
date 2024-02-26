@@ -3,7 +3,7 @@
 This is a semaphore implementation for use with `async` and `await`. The
 implementation follows the traditional definition of a semaphore rather than the
 definition of an asynchronous semaphore seen in some js community examples.
-Where as the latter one generally allows every defined task to proceed
+Whereas the latter one generally allows every defined task to proceed
 immediately and synchronizes at the end, async-sema allows only a selected
 number of tasks to proceed at once while the rest will remain waiting.
 
